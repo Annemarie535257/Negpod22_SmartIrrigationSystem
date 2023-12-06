@@ -1,12 +1,10 @@
 import sqlite3
-from getpass import getpass  # For securely entering passwords
+from getpass import getpass
 
-# Function to create a database connection and initialize the table
 def initialize_database():
     conn = sqlite3.connect("user_data.db")
     cursor = conn.cursor()
 
-    # Create a table if it doesn't exist
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -19,14 +17,12 @@ def initialize_database():
     conn.commit()
     conn.close()
 
-# Function to get user information and store it in the database
-def get_user_info():
-    print("Enter your personal information:")
-    username = input("Username: ")
-    password = getpass("Password: ")  # Using getpass to securely enter passwords
-    email = input("Email: ")
+def sign_up():
+    print("Sign Up:")
+    username = input("Enter a username: ")
+    password = getpass("Enter a password: ")
+    email = input("Enter your email: ")
 
-    # Insert user information into the database
     conn = sqlite3.connect("user_data.db")
     cursor = conn.cursor()
 
@@ -35,12 +31,41 @@ def get_user_info():
     conn.commit()
     conn.close()
 
-    print(i"Registration successful!")
+    print("Registration successful!")
 
-# Main function to initialize the database and get user information
+def login():
+    print("Login:")
+    username = input("Enter your username: ")
+    password = getpass("Enter your password: ")
+
+    conn = sqlite3.connect("user_data.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
+    user = cursor.fetchone()
+
+    conn.close()
+
+    if user:
+        print("Login successful!")
+    else:
+        print("Invalid username or password.")
+
 def main():
     initialize_database()
-    get_user_info()
+
+    print("Choose an option:")
+    print("1. Sign Up")
+    print("2. Login")
+
+    choice = input("Enter the number of your choice: ")
+
+    if choice == "1":
+        sign_up()
+    elif choice == "2":
+        login()
+    else:
+        print("Invalid choice. Please enter either '1' for Sign Up or '2' for Login.")
 
 if __name__ == "__main__":
     main()
