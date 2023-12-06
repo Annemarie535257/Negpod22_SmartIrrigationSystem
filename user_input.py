@@ -10,25 +10,31 @@ def menu():
     print("5. Exit")
 
 def start_irrigation():
+    print("\nContinue to enter moisture level")
+    time.sleep(2)
     print("\nStarting irrigation. Please wait...")
     time.sleep(2)
     print("Irrigation in progress.")
+    time.sleep(2)
 
 def stop_irrigation():
     print("\nStopping irrigation.")
     time.sleep(1)
     print("Irrigation halted. Soil moisture levels stabilized.")
+    time.sleep(2)
 
 def adjust_settings():
     print("\nAdjusting irrigation settings. Finding the optimal balance.")
     time.sleep(2)
     print("Settings adjusted. The system is now optimized for efficiency.")
+    time.sleep(2)
 
 def check_system_status():
     print("\nChecking system status. Verifying sensors and components.")
     time.sleep(1)
     status = random.choice(["Normal", "Sensors Offline", "Low Water Supply"])
     print(f"System status: {status}")
+    time.sleep(2)
 
 def main():
     print("WELCOME TO THE UNIQUE SMART IRRIGATION SYSTEM")
