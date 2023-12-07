@@ -50,6 +50,6 @@ while True:
             else:
                 print("Please provide a valid input (1-8)")
         else:
-            print("Invalid input. Please enter a number (1-7).")
+            print("Invalid input. Please enter a number (1-8).")
 if __name__ == "__main__":
     main()
