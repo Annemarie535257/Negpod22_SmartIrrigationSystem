@@ -53,7 +53,7 @@ tracker.track_activity(user_id=2, activity_name='Search', '2023-11-30 1:47:35')
 
 # Track activities for user 3
 tracker.track_activity(user_id=3, activity_name='Login', '2023-12-2 1:15:00')
-tracker.track_activity(user_id=3, activity_name='Form submission')
+tracker.track_activity(user_id=3, activity_name='Form submission', '2023-12-4')
 
 # Get activities for user 1 and user 2
 user1_activities = tracker.get_user_activities(user_id=1)
