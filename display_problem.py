@@ -23,7 +23,6 @@ conn.commit()
 def display_soil_moisture(sensor, irrigation_system):
     sensor.measure_moisture()
     moisture_level = sensor.get_moisture_level()
-    need_irrigation = irrigation_system.needs_irrigation(moisture_level)
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     # Display soil moisture level
@@ -32,14 +31,16 @@ def display_soil_moisture(sensor, irrigation_system):
     print(f"Soil Moisture Level: {moisture_level:.2f}%")
     
     # Store data in the database
+    conn = sqlite3.connect("user_data.db")
+    cursor = conn.cursor()
+
     cursor.execute('''
-        INSERT INTO moisture_data (location, timestamp, moisture_level, need_irrigation)
-        VALUES (?, ?, ?, ?)
-    ''', (sensor.location, timestamp, moisture_level, need_irrigation))
+        INSERT INTO moisture_data (location, timestamp, moisture_level)
+        VALUES (?, ?, ?)
+    ''', (sensor.location, timestamp, moisture_level))
 
     conn.commit()
-
-conn.close()
+    conn.close()
 
 
 class SoilMoistureSensor:
@@ -59,17 +60,6 @@ class IrrigationSystem:
 
     def needs_irrigation(self, moisture_level):
         return moisture_level < self.threshold
-
-def display_soil_moisture(sensor, irrigation_system):
-    sensor.measure_moisture()
-    moisture_level = sensor.get_moisture_level()
-    need_irrigation = irrigation_system.needs_irrigation(moisture_level)
-
-    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    print(f"Location: {sensor.location}")
-    print(f"Timestamp: {timestamp}")
-    print(f"Soil Moisture Level: {moisture_level:.2f}%")
-
 
 if __name__ == "__main__":
     sensor1 = SoilMoistureSensor(location="Fields")
