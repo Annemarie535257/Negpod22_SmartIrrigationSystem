@@ -24,7 +24,7 @@ while True:
         print("6. Adjust Settings")
         print("7. Check System Status")
         print("8. Exit")
- user_input = input("\nEnter your choice (1-7): ")
+ user_input = input("\nEnter your choice (1-8): ")
 
         if user_input.isdigit():
             choice = int(user_input)
@@ -51,3 +51,5 @@ while True:
                 print("Please provide a valid input (1-7)")
         else:
             print("Invalid input. Please enter a number (1-7).")
+if __name__ == "__main__":
+    main()
