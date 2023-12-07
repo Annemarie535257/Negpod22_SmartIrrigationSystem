@@ -1,3 +1,5 @@
+import random
+import time
 import sqlite3
 from getpass import getpass
 
@@ -32,6 +34,7 @@ def sign_up():
     conn.close()
 
     print("Registration successful!")
+    time.sleep(4)
 
 def login():
     print("Login:")
@@ -50,24 +53,9 @@ def login():
         print("Login successful!")
     else:
         print("Invalid username or password.")
+        time.sleep(4)
 
 #function to view the users in the database
-
-def view_signup_details():
-    conn = sqlite3.connect("user_data.db")
-    cursor = conn.cursor()
-
-    cursor.execute("SELECT * FROM users")
-    signup_details = cursor.fetchall()
-
-    conn.close()
-
-    if signup_details:
-        print("Signup Details:")
-        for user in signup_details:
-            print(f"User ID: {user[0]}, Username: {user[1]}, Email: {user[3]}")
-    else:
-        print("No signup details found.")
 
 
 def main():
@@ -76,16 +64,15 @@ def main():
     print("Choose an option:")
     print("1. Sign Up")
     print("2. Login")
-    print("3. View Users")
 
     choice = input("Enter the number of your choice: ")
 
     if choice == "1":
         sign_up()
+        main()
     elif choice == "2":
         login()
-    elif choice == "3":
-        view_signup_details()
+        main()
     else:
         print("Invalid choice. Please enter either '1' for Sign Up or '2' for Login.")
 
