@@ -87,7 +87,7 @@ tracker.track_activity(user_id=2, activity_name='Logout')
 
 tracker.track_activity(user_id=3, activity_name='Login')
 tracker.track_activity(user_id=3, activity_name='Form submission')
-tracker.track_activity(user_id=3, activity_name='Logout')
+tracker.track_activity(user_id=3, activity_name='Logoutt')
 
 # Get activities for users
 user1_activities = tracker.get_user_activities(user_id=1)
