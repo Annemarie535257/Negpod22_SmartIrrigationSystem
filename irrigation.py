@@ -10,25 +10,47 @@ def menu():
     print("5. Exit")
 
 def start_irrigation():
-    print("\nStarting irrigation. Please wait...")
-    time.sleep(2)
-    print("Irrigation in progress.")
+    print("\nTo Start Irrigation:")
+    print("Continue to enter moisture level.")
+    moisture_level = input("Enter the moisture level in the soil: ")
+    if validate_user_input(moisture_level):
+        print("Irrigation Needed!")
+        time.sleep(2)
+        print("\nStarting irrigation. Please wait...")
+        time.sleep(2)
+        print("Irrigation in progress.")
+        time.sleep(2)
+       
+    else:
+        print(f"Enough water in the soil.")
+        print(f"No irrigation needed.")
+        time.sleep(3)
 
 def stop_irrigation():
     print("\nStopping irrigation.")
     time.sleep(1)
     print("Irrigation halted. Soil moisture levels stabilized.")
+    time.sleep(2)
 
 def adjust_settings():
     print("\nAdjusting irrigation settings. Finding the optimal balance.")
     time.sleep(2)
     print("Settings adjusted. The system is now optimized for efficiency.")
+    time.sleep(2)
 
 def check_system_status():
     print("\nChecking system status. Verifying sensors and components.")
     time.sleep(1)
-    status = random.choice(["Normal", "Sensors Offline", "Low Water Supply"])
+    status = random.choice(["Normal", "Sensors Online", "Low Water Supply"])
     print(f"System status: {status}")
+    time.sleep(2)
+
+def validate_user_input(input_value):
+    if input_value.lstrip('-').isdigit():
+        validated_input = int(input_value)
+        if 1 <= validated_input <= 5:
+            return True
+    return False
 
 def main():
     print("WELCOME TO THE UNIQUE SMART IRRIGATION SYSTEM")
