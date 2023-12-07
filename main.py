@@ -9,12 +9,12 @@ def main():
 
     while True:
         print("\nSMART IRRIGATION SYSTEM MENU")
-        print("1. Start Irrigation")
-        print("2. Stop Irrigation")
-        print("3. Adjust Settings")
-        print("4. Check System Status")
-        print("5. User Registration")
-        print("6. Login")
+        print("1. User Registration")
+        print("2. Login")
+        print("3. Start Irrigation")
+        print("4. Stop Irrigation")
+        print("5. Adjust Settings")
+        print("6. Check System Status")
         print("7. Exit")
 
         user_input = input("\nEnter your choice (1-7): ")
@@ -23,17 +23,17 @@ def main():
             choice = int(user_input)
             if 1 <= choice <= 7:
                 if choice == 1:
-                    start_irrigation()
-                elif choice == 2:
-                    stop_irrigation()
-                elif choice == 3:
-                    adjust_settings()
-                elif choice == 4:
-                    check_system_status()
-                elif choice == 5:
                     sign_up()
-                elif choice == 6:
+                elif choice == 2:
                     login()
+                elif choice == 3:
+                    start_irrigation()
+                elif choice == 4:
+                    stop_irrigation()
+                elif choice == 5:
+                    adjust_settings()
+                elif choice == 6:
+                    check_system_status()
                 elif choice == 7:
                     print("Exiting the program. Thank you for using the Unique Smart Irrigation System!")
                     break
@@ -44,4 +44,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
