@@ -1,6 +1,47 @@
 import random
 from datetime import datetime
 
+import sqlite3
+
+# Connect to SQLite database (creates a new database if it doesn't exist)
+conn = sqlite3.connect('user_data.db')
+cursor = conn.cursor()
+
+# Create a table to store soil moisture data if it doesn't exist
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS moisture_data (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        location TEXT,
+        timestamp DATETIME,
+        moisture_level REAL,
+        need_irrigation INTEGER
+    )
+''')
+
+conn.commit()
+
+def display_soil_moisture(sensor, irrigation_system):
+    sensor.measure_moisture()
+    moisture_level = sensor.get_moisture_level()
+    need_irrigation = irrigation_system.needs_irrigation(moisture_level)
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # Display soil moisture level
+    print(f"Location: {sensor.location}")
+    print(f"Timestamp: {timestamp}")
+    print(f"Soil Moisture Level: {moisture_level:.2f}%")
+    
+    # Store data in the database
+    cursor.execute('''
+        INSERT INTO moisture_data (location, timestamp, moisture_level, need_irrigation)
+        VALUES (?, ?, ?, ?)
+    ''', (sensor.location, timestamp, moisture_level, need_irrigation))
+
+    conn.commit()
+
+conn.close()
+
+
 class SoilMoistureSensor:
     def __init__(self, location):
         self.location = location
@@ -28,4 +69,10 @@ def display_soil_moisture(sensor, irrigation_system):
     print(f"Location: {sensor.location}")
     print(f"Timestamp: {timestamp}")
     print(f"Soil Moisture Level: {moisture_level:.2f}%")
+
+
+if __name__ == "__main__":
+    sensor1 = SoilMoistureSensor(location="Fields")
+    irrigation_system1 = IrrigationSystem(threshold=5)
+    display_soil_moisture(sensor1, irrigation_system1)
 
