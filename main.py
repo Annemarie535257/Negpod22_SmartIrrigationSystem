@@ -35,7 +35,7 @@ def main():
                 elif choice == 6:
                     check_system_status()
                 elif choice == 7:
-                    print("Exiting the program. Thank you for using the Unique Smart Irrigation System!")
+                    print("Exiting the program. Thank you for using the Unique Smart Irrigation System!!")
                     break
             else:
                 print("Please provide a valid input (1-7)")
