@@ -24,3 +24,30 @@ while True:
         print("6. Adjust Settings")
         print("7. Check System Status")
         print("8. Exit")
+ user_input = input("\nEnter your choice (1-7): ")
+
+        if user_input.isdigit():
+            choice = int(user_input)
+            if 1 <= choice <= 7:
+                if choice == 1:
+                    sign_up()
+                elif choice == 2:
+                    login()
+                elif choice == 3:
+                    display_soil_moisture(sensor, irrigation_system)
+                    time.sleep(4)
+                elif choice == 4:
+                    start_irrigation()
+                elif choice == 5:
+                    stop_irrigation()
+                elif choice == 6:
+                    adjust_settings()
+                elif choice == 7:
+                    check_system_status()
+                elif choice == 8:
+                    print("Exiting the program. Thank you for using the Unique Smart Irrigation System!")
+                    break
+            else:
+                print("Please provide a valid input (1-7)")
+        else:
+            print("Invalid input. Please enter a number (1-7).")
