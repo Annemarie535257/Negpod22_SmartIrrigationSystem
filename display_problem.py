@@ -1,20 +1,60 @@
 import random
 from datetime import datetime
 
+import sqlite3
+
+# Connect to SQLite database (creates a new database if it doesn't exist)
+conn = sqlite3.connect('user_data.db')
+cursor = conn.cursor()
+
+# Create a table to store soil moisture data if it doesn't exist
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS moisture_data (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        location TEXT,
+        timestamp DATETIME,
+        moisture_level REAL,
+        need_irrigation INTEGER
+    )
+''')
+
+conn.commit()
+
+def display_soil_moisture(sensor, irrigation_system):
+    sensor.measure_moisture()
+    moisture_level = sensor.get_moisture_level()
+    need_irrigation = irrigation_system.needs_irrigation(moisture_level)
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
+    # Display soil moisture level
+    print(f"Location: {sensor.location}")
+    print(f"Timestamp: {timestamp}")
+    print(f"Soil Moisture Level: {moisture_level:.2f}%")
+    
+    # Store data in the database
+    cursor.execute('''
+        INSERT INTO moisture_data (location, timestamp, moisture_level, need_irrigation)
+        VALUES (?, ?, ?, ?)
+    ''', (sensor.location, timestamp, moisture_level, need_irrigation))
+
+    conn.commit()
+
+conn.close()
+
+
 class SoilMoistureSensor:
     def __init__(self, location):
         self.location = location
         self.moisture_level = 0  # Initialize moisture level
 
     def measure_moisture(self):
-        # Simulate measuring soil moisture (replace with actual sensor readings)
-        self.moisture_level = random.uniform(0, 100)
+        self.moisture_level = random.uniform(0, 10)
 
     def get_moisture_level(self):
         return self.moisture_level
 
 class IrrigationSystem:
-    def __init__(self, threshold=30):
+    def __init__(self, threshold=5):
         self.threshold = threshold  # Moisture level below which irrigation is needed
 
     def needs_irrigation(self, moisture_level):
@@ -30,19 +70,9 @@ def display_soil_moisture(sensor, irrigation_system):
     print(f"Timestamp: {timestamp}")
     print(f"Soil Moisture Level: {moisture_level:.2f}%")
 
-    if need_irrigation:
-        print("Irrigation is needed!\n")
-    else:
-        print("No irrigation needed.\n")
 
-# Example of usage
 if __name__ == "__main__":
-    # Create a soil moisture sensor for a specific location
-    sensor1 = SoilMoistureSensor(location="Garden")
-
-    # Create an irrigation system with a moisture threshold
-    irrigation_system1 = IrrigationSystem(threshold=30)
-
-    # Display soil moisture information
+    sensor1 = SoilMoistureSensor(location="Fields")
+    irrigation_system1 = IrrigationSystem(threshold=5)
     display_soil_moisture(sensor1, irrigation_system1)
 
