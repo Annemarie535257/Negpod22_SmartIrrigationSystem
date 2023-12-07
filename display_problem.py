@@ -38,8 +38,7 @@ def display_soil_moisture(sensor, irrigation_system):
     ''', (sensor.location, timestamp, moisture_level, need_irrigation))
 
     conn.commit()
-
-conn.close()
+    conn.close()
 
 
 class SoilMoistureSensor:
