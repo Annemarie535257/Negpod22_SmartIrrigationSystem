@@ -14,3 +14,13 @@ def main():
         # Create instances of SoilMoistureSensor and IrrigationSystem
     sensor = SoilMoistureSensor(location="Fields")
     irrigation_system = IrrigationSystem(threshold=5)
+while True:
+        print("\nSMART IRRIGATION SYSTEM MENU")
+        print("1. Signup")
+        print("2. Login")
+        print("3. check moisture level")
+        print("4. Start Irrigation")
+        print("5. Stop Irrigation")
+        print("6. Adjust Settings")
+        print("7. Check System Status")
+        print("8. Exit")
