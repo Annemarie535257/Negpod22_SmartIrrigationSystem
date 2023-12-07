@@ -1,43 +1,48 @@
-def display_agriculture_problems(temperature, humidity, soil_moisture, crop_type):
-    """
-    Display potential agriculture problems based on environmental factors.
+import random
+from datetime import datetime
 
-    Parameters:
-    - temperature: Temperature in Celsius
-    - humidity: Humidity percentage
-    - soil_moisture: Soil moisture percentage
-    - crop_type: Type of crop being cultivated
+class SoilMoistureSensor:
+    def __init__(self, location):
+        self.location = location
+        self.moisture_level = 0  # Initialize moisture level
 
-    Returns:
-    None (Prints recommendations)
-    """
-    print("Analyzing agriculture conditions...")
-    
-    # Check temperature range
-    if temperature < 10 or temperature > 35:
-        print("Warning: Temperature is outside the optimal range for most crops.")
+    def measure_moisture(self):
+        # Simulate measuring soil moisture (replace with actual sensor readings)
+        self.moisture_level = random.uniform(0, 100)
 
-    # Check humidity levels
-    if humidity < 40 or humidity > 80:
-        print("Warning: Humidity levels may not be suitable for the chosen crop.")
+    def get_moisture_level(self):
+        return self.moisture_level
 
-    # Check soil moisture
-    if soil_moisture < 20 or soil_moisture > 80:
-        print("Warning: Soil moisture levels are not within the recommended range.")
+class IrrigationSystem:
+    def __init__(self, threshold=30):
+        self.threshold = threshold  # Moisture level below which irrigation is needed
 
-    # Specific recommendations based on crop type
-    if crop_type == "wheat":
-        print("Consider adjusting planting schedule for optimal wheat growth.")
+    def needs_irrigation(self, moisture_level):
+        return moisture_level < self.threshold
 
-    elif crop_type == "rice":
-        print("Ensure proper water management for rice cultivation.")
+def display_soil_moisture(sensor, irrigation_system):
+    sensor.measure_moisture()
+    moisture_level = sensor.get_moisture_level()
+    need_irrigation = irrigation_system.needs_irrigation(moisture_level)
 
-    elif crop_type == "tomatoes":
-        print("Check for signs of pests and diseases in tomato plants.")
+    timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    print(f"Location: {sensor.location}")
+    print(f"Timestamp: {timestamp}")
+    print(f"Soil Moisture Level: {moisture_level:.2f}%")
 
+    if need_irrigation:
+        print("Irrigation is needed!\n")
     else:
-        print("No specific recommendations for the given crop type.")
+        print("No irrigation needed.\n")
 
-# Example usage
-display_agriculture_problems(25, 60, 50, "wheat")
+# Example of usage
+if __name__ == "__main__":
+    # Create a soil moisture sensor for a specific location
+    sensor1 = SoilMoistureSensor(location="Garden")
+
+    # Create an irrigation system with a moisture threshold
+    irrigation_system1 = IrrigationSystem(threshold=30)
+
+    # Display soil moisture information
+    display_soil_moisture(sensor1, irrigation_system1)
 
