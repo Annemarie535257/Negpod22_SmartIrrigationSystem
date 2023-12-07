@@ -41,7 +41,7 @@ def adjust_settings():
 def check_system_status():
     print("\nChecking system status. Verifying sensors and components.")
     time.sleep(1)
-    status = random.choice(["Normal", "Sensors Offline", "Low Water Supply"])
+    status = random.choice(["Normal", "Sensors Online", "Low Water Supply"])
     print(f"System status: {status}")
     time.sleep(2)
 
