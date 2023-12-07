@@ -42,25 +42,30 @@ tracker = UserTracker()
 # Create users
 tracker.create_user(user_id=1, username='Alice')
 tracker.create_user(user_id=2, username='Bob')
+tracker.create_user(user_id=3, username='Mary')
 
 # Track activities for user 1
-tracker.track_activity(user_id=1, activity_name='Login', '2023-11-29 12:30:00')
-tracker.track_activity(user_id=1, activity_name='Page View', '2023-11-29 12:35:10')
+tracker.track_activity(user_id=1, activity_name='Login')
+tracker.track_activity(user_id=1, activity_name='Page View')
+tracker.track_activity(user_id=1, activity_name='Logout')
 
 # Track activities for user 2
-tracker.track_activity(user_id=2, activity_name='Login', '2023-11-30 11:45:12')
-tracker.track_activity(user_id=2, activity_name='Search', '2023-11-30 1:47:35')
+tracker.track_activity(user_id=2, activity_name='Login')
+tracker.track_activity(user_id=2, activity_name='Search')
+tracker.track_activity(user_id=2, activity_name='Logout')
 
 # Track activities for user 3
-tracker.track_activity(user_id=3, activity_name='Login', '2023-12-2 1:15:00')
-tracker.track_activity(user_id=3, activity_name='Form submission', '2023-12-2 1:30:05')
-tracker.track_activity(user_id=3, activity_name='Logout', '2023-12-2 1:35:03')
+tracker.track_activity(user_id=3, activity_name='Login')
+tracker.track_activity(user_id=3, activity_name='Form submission')
+tracker.track_activity(user_id=3, activity_name='Logout')
 
-# Get activities for user 1 and user 2
+# Get activities for user 1, user 2 and user 3
 user1_activities = tracker.get_user_activities(user_id=1)
 user2_activities = tracker.get_user_activities(user_id=2)
+user3_activities = tracker.get user_activities(user_id=3)
 
 print(f"\nUser 1 Activities: {user1_activities}")
 print(f"User 2 Activities: {user2_activities}")
+print(f"User 3 Activities: {user3_activities}")
 
 
