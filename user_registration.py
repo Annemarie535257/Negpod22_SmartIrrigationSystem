@@ -51,12 +51,32 @@ def login():
     else:
         print("Invalid username or password.")
 
+#function to view the users in the database
+
+def view_signup_details():
+    conn = sqlite3.connect("user_data.db")
+    cursor = conn.cursor()
+
+    cursor.execute("SELECT * FROM users")
+    signup_details = cursor.fetchall()
+
+    conn.close()
+
+    if signup_details:
+        print("Signup Details:")
+        for user in signup_details:
+            print(f"User ID: {user[0]}, Username: {user[1]}, Email: {user[3]}")
+    else:
+        print("No signup details found.")
+
+
 def main():
     initialize_database()
 
     print("Choose an option:")
     print("1. Sign Up")
     print("2. Login")
+    print("3. View Users")
 
     choice = input("Enter the number of your choice: ")
 
@@ -64,6 +84,8 @@ def main():
         sign_up()
     elif choice == "2":
         login()
+    elif choice == "3":
+        view_signup_details()
     else:
         print("Invalid choice. Please enter either '1' for Sign Up or '2' for Login.")
 
