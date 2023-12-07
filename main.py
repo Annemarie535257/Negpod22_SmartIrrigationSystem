@@ -28,7 +28,7 @@ while True:
 
         if user_input.isdigit():
             choice = int(user_input)
-            if 1 <= choice <= 7:
+            if 1 <= choice <= 8:
                 if choice == 1:
                     sign_up()
                 elif choice == 2:
