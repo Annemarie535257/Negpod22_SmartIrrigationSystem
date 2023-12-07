@@ -48,7 +48,7 @@ while True:
                     print("Exiting the program. Thank you for using the Unique Smart Irrigation System!")
                     break
             else:
-                print("Please provide a valid input (1-7)")
+                print("Please provide a valid input (1-8)")
         else:
             print("Invalid input. Please enter a number (1-7).")
 if __name__ == "__main__":
