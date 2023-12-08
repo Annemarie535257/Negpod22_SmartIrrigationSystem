@@ -1,20 +1,23 @@
 from datetime import datetime
-import time 
+import time
 import random
 from getpass import getpass
-from moisture_check import SoilMoistureSensor, IrrigationSystem
-from moisture_check import display_soil_moisture 
+from display_problem import SoilMoistureSensor, IrrigationSystem
+from display_problem import display_soil_moisture
 from user_registration import initialize_database, sign_up, login
-from irrigation import menu, start_irrigation, stop_irrigation, adjust_settings, check_system_status
+from irrigation_system import menu, start_irrigation, stop_irrigation, adjust_settings, check_system_status
+
 def main():
     print("WELCOME TO THE UNIQUE SMART IRRIGATION SYSTEM")
 
     # Initialize the user database
     initialize_database()
-        # Create instances of SoilMoistureSensor and IrrigationSystem
+
+    # Create instances of SoilMoistureSensor and IrrigationSystem
     sensor = SoilMoistureSensor(location="Fields")
     irrigation_system = IrrigationSystem(threshold=5)
-while True:
+
+    while True:
         print("\nSMART IRRIGATION SYSTEM MENU")
         print("1. Signup")
         print("2. Login")
@@ -24,7 +27,8 @@ while True:
         print("6. Adjust Settings")
         print("7. Check System Status")
         print("8. Exit")
-user_input = input("\nEnter your choice (1-8): ")
+        
+        user_input = input("\nEnter your choice (1-8): ")
 
         if user_input.isdigit():
             choice = int(user_input)
@@ -51,5 +55,7 @@ user_input = input("\nEnter your choice (1-8): ")
                 print("Please provide a valid input (1-8)")
         else:
             print("Invalid input. Please enter a number (1-8).")
+
 if __name__ == "__main__":
     main()
+
