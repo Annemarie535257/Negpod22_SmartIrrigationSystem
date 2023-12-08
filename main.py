@@ -24,7 +24,7 @@ while True:
         print("6. Adjust Settings")
         print("7. Check System Status")
         print("8. Exit")
- user_input = input("\nEnter your choice (1-8): ")
+user_input = input("\nEnter your choice (1-8): ")
 
         if user_input.isdigit():
             choice = int(user_input)
